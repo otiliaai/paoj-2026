@@ -9,12 +9,13 @@ Programare Avansată pe Obiecte în Java — materiale și resurse pentru cursul
 
 ## Laboratoare
 
-| Laborator | Subiect |
-|-----------|---------|
-| [laboratory00](src/com/pao/laboratory00/Readme.md) | Primul program, array-uri, Scanner |
-| [laboratory01](src/com/pao/laboratory01/Readme.md) | Clase, încapsulare, Singleton, Comparator |
+| Laborator                                          | Subiect                                                          |
+|----------------------------------------------------|------------------------------------------------------------------|
+| [laboratory00](src/com/pao/laboratory00/Readme.md) | Primul program, array-uri, Scanner                               |
+| [laboratory01](src/com/pao/laboratory01/Readme.md) | Clase, încapsulare, Singleton, Comparator                        |
 | [laboratory02](src/com/pao/laboratory02/Readme.md) | Moștenire, clase abstracte, interfețe, equals/hashCode, colecții |
-| [laboratory03](src/com/pao/laboratory03/Readme.md) | Map, enum-uri, excepții custom |
+| [laboratory03](src/com/pao/laboratory03/Readme.md) | Map, enum-uri, excepții custom                                   |
+| [laboratoryX](src/com/pao/laboratoryX/Readme.md)   | X                                                                |
 
 
 ---
