@@ -14,7 +14,119 @@ Programare Avansată pe Obiecte în Java — materiale și resurse pentru cursul
 | [laboratory00](src/com/pao/laboratory00/Readme.md) | Primul program, array-uri, Scanner |
 | [laboratory01](src/com/pao/laboratory01/Readme.md) | Clase, încapsulare, Singleton, Comparator |
 | [laboratory02](src/com/pao/laboratory02/Readme.md) | Moștenire, clase abstracte, interfețe, equals/hashCode, colecții |
+| [laboratory03](src/com/pao/laboratory03/Readme.md) | Map, enum-uri, excepții custom |
 
+
+---
+
+## Cum trimiți soluțiile (începând cu laboratory03)
+
+> 🎬 **Video tutorial:** [Cum faci fork și trimiți soluțiile — YouTube](https://www.youtube.com/watch?v=PLACEHOLDER)
+
+### Pre-rechizite
+
+- ✅ Cont pe [github.com](https://github.com) (gratuit)
+- ✅ Git instalat — `git --version` în terminal ([descarcă de aici](https://git-scm.com/downloads) dacă nu ai)
+- ✅ Autentificare configurată — recomand [GitHub CLI](https://cli.github.com/) (`gh auth login`) sau SSH key
+
+---
+
+**1. Fork** — creează-ți propria copie a repo-ului:
+- Deschide repo-ul cursului pe GitHub
+- Click **Fork** (dreapta sus) → **Create fork**
+- Acum ai `https://github.com/USERNAME-UL-TAU/paoj-2026`
+
+**2. Schimbi `origin` să pointeze spre fork-ul tău:**
+```bash
+cd C:\Users\stefan\path\to\paoj-2026  # sau unde ai tu clona locală
+git remote rename origin upstream
+git remote add origin https://github.com/USERNAME-UL-TAU/paoj-2026.git
+```
+
+**3. Push-ul inițial către fork:**
+```bash
+git push -u origin main
+```
+
+**4. Verifică:**
+```bash
+git remote -v
+# origin    https://github.com/USERNAME-UL-TAU/paoj-2026.git          (fork-ul tău)
+# upstream  https://github.com/stefaneduard-deaconu/paoj-2026.git    (repo-ul cursului)
+```
+
+✅ **Gata!** Acum ai aceeași configurație ca cei care încep de la zero.
+
+---
+
+### 🆕 VARIANTA B — Începi acum (studenți noi)
+
+**1. Fork + clone:**
+- Deschide [https://github.com/stefaneduard-deaconu/paoj-2026](https://github.com/stefaneduard-deaconu/paoj-2026)
+- Click **Fork** → **Create fork**
+- Clonează fork-ul tău:
+```bash
+git clone https://github.com/USERNAME-UL-TAU/paoj-2026.git
+cd paoj-2026
+```
+
+**2. Adaugă repo-ul cursului ca `upstream`:**
+```bash
+git remote add upstream https://github.com/stefaneduard-deaconu/paoj-2026.git
+```
+
+**3. Verifică:**
+```bash
+git remote -v
+# origin    https://github.com/USERNAME-UL-TAU/paoj-2026.git          (fork-ul tău)
+# upstream  https://github.com/stefaneduard-deaconu/paoj-2026.git    (repo-ul cursului)
+```
+
+---
+
+### 📅 Flux săptămânal (pentru TOȚI studenții)
+
+**1. Actualizează** cu materialele noi de la curs:
+```bash
+git fetch upstream
+git merge upstream/main
+```
+> Dacă ai conflicte: `git status` → rezolvă fișierele → `git add .` → `git commit`
+
+**2. Lucrează** la exerciții — creează clase, completează TODO-uri.
+
+**3. Salvează** progresul:
+```bash
+git add .
+git commit -m "Lab4: exercitiile 1-4 completate"
+git push origin main
+```
+
+**4. Submit** — link către fork-ul tău pe platforma de curs.
+
+---
+
+### 📊 Diagrama
+
+```
+  [Repo curs]  ──upstream──>  [Fork-ul tău pe GitHub]  ──origin──>  [Clona locală]
+  (read-only)                 (soluțiile tale)                       (lucrezi aici)
+       │                              ▲                                    │
+       │     git fetch upstream       │          git push origin main      │
+       └──────────────────────────────┘────────────────────────────────────┘
+```
+
+---
+
+### ⚠️ Greșeli frecvente
+
+| Problemă | Soluție |
+|----------|---------|
+| `fatal: remote upstream already exists` | Ai adăugat deja upstream — skip acest pas |
+| `fatal: refusing to merge unrelated histories` | `git merge upstream/main --allow-unrelated-histories` |
+| Conflicte la merge | `git status` → editează fișierele → `git add .` → `git commit` |
+| `Push rejected` | `git pull origin main --rebase` apoi `git push` |
+| Am uitat să fac fetch înainte | `git fetch upstream && git merge upstream/main` oricând |
 
 ---
 
