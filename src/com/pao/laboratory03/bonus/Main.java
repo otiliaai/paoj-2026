@@ -1,5 +1,8 @@
 package com.pao.laboratory03.bonus;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * Exercițiul 5 (Bonus) — Sistem de gestiune task-uri cu audit log
  *
@@ -153,11 +156,61 @@ package com.pao.laboratory03.bonus;
  * === Excepții ===
  * TaskNotFoundException: Task-ul 'T999' nu a fost găsit
  */
+
 public class Main {
     public static void main(String[] args) {
-        // TODO: implementează toți cei 10 pași de mai sus
-        // Creează TOATE clasele necesare în acest pachet (bonus/)
-        // Nu ai subpachete impuse — organizează cum consideri
+        TaskService service = TaskService.getInstance();
+
+        Task t1 = service.addTask("Sleep", Priority.CRITICAL);
+        Task t2 = service.addTask("Work", Priority.LOW);
+        Task t3 = service.addTask("Rest", Priority.MEDIUM);
+        Task t4 = service.addTask("Eat", Priority.HIGH);
+        Task t5 = service.addTask("Run", Priority.HIGH);
+
+        System.out.println(t1);
+        System.out.println(t2);
+        System.out.println(t3);
+        System.out.println(t4);
+        System.out.println(t5);
+
+        service.assignTask("T001", "Ana");
+        service.assignTask("T003", "Mihai");
+        service.assignTask("T004", "Elena");
+
+        service.changeStatus("T001", Status.IN_PROGRESS);
+        service.changeStatus("T001", Status.DONE);
+        service.changeStatus("T003", Status.IN_PROGRESS);
+
+        try {
+            service.changeStatus("T001", Status.TODO);
+        } catch (InvalidTransitionException e) {
+            System.out.println(e.getMessage());
+        }
+
+        List<Task> highTasks = service.getTasksByPriority(Priority.HIGH);
+        for (Task t : highTasks) {
+            System.out.println(t);
+        }
+
+        Map<Status, Integer> summary = service.getStatusSummary();
+        for (Status s : Status.values()) {
+            System.out.println(s + ": " + summary.get(s));
+        }
+
+        List<Task> unassignedTasks = service.getUnassignedTasks();
+        for (Task t : unassignedTasks) {
+            System.out.println(t.getId() + " " + t.getTitle());
+        }
+
+        System.out.println(service.getTotalUrgencyScore(5));
+
+        service.printAuditLog();
+
+        try {
+            service.getTaskById("T999");
+        } catch (TaskNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
 
