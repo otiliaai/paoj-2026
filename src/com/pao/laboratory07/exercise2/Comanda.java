@@ -5,6 +5,7 @@ public abstract sealed class Comanda permits ComandaStandard, ComandaRedusa, Com
     protected String nume;
     protected double pret;
     protected StareComanda stareComanda;
+    protected String client;
 
     Comanda(String nume) {
         this.nume = nume;
@@ -16,6 +17,16 @@ public abstract sealed class Comanda permits ComandaStandard, ComandaRedusa, Com
         this.stareComanda = StareComanda.PLACED;
     }
 
+    Comanda(String nume, double pret, String client) {
+        this.nume = nume;
+        this.pret = pret;
+        this.client = client;
+        this.stareComanda = StareComanda.PLACED;
+    }
+
     public abstract double pretFinal();
     public abstract String descriere();
+    public String getClient() {
+        return  this.client;
+    }
 }
