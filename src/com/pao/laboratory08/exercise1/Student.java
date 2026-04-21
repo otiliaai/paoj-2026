@@ -5,7 +5,7 @@ public class Student implements Cloneable {
     private int varsta;
     private Adresa adresa;
 
-    Student(String nume, int varsta, Adresa adresa) {
+    public Student(String nume, int varsta, Adresa adresa) {
         this.nume = nume;
         this.varsta = varsta;
         this.adresa = adresa;

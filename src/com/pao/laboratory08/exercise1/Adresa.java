@@ -4,7 +4,7 @@ public class Adresa implements Cloneable {
     private String oras;
     private String strada;
 
-     Adresa(String oras, String strada){
+     public Adresa(String oras, String strada){
          this.oras = oras;
          this.strada = strada;
      }
