@@ -80,8 +80,8 @@ public class Main {
                     comenzi.stream()
                             .sorted((a, b) -> {
                                 int cmp = a.getClient().compareTo(b.getClient());
-                                if (cmp != 0) return cmp; // clienti diferiti -> alfabetic
-                                return Double.compare(a.pretFinal(), b.pretFinal()); // acelasi client -> pret crescator
+                                if (cmp != 0) return cmp; // clienti diferiti - alfabetic
+                                return Double.compare(a.pretFinal(), b.pretFinal()); // acelasi client - pret crescator
                             })
                             .forEach(c -> System.out.println(c.descriere() + " - client: " + c.getClient()));
                 }

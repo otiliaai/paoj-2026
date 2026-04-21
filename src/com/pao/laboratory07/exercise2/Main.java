@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        //citire N
+
         int n = Integer.parseInt(sc.nextLine().trim());
         List<Comanda> comenzi = new ArrayList<>();
         int nrStandard = 0, nrDiscounted = 0, nrGift = 0;

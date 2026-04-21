@@ -5,5 +5,4 @@ public enum OrderCommand {
     cancel,
     undo,
     QUIT;
-
 }
