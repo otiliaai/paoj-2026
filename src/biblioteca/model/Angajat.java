@@ -2,9 +2,10 @@ package biblioteca.model;
 
 public class Angajat extends Persoana {
     private String functie;
+    private static int contor = 1;
 
-    public Angajat(int id, String nume, String email, String functie) {
-        super(id, nume, email);
+    public Angajat(String nume, String email, String functie) {
+        super(contor++,nume, email);
         this.functie = functie;
     }
 

@@ -4,11 +4,13 @@ public class Sectiune {
     protected int id;
     protected String nume;
     protected String descriere;
+    private static int contor = 1;
 
-    public Sectiune(int id, String nume, String descriere) {
+    public Sectiune(String nume, String descriere) {
         this.id = id;
         this.descriere = descriere;
         this.nume = nume;
+        this.id = contor++;
     }
 
     public int getId(){

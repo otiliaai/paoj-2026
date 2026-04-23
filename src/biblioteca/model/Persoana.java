@@ -6,13 +6,13 @@ public abstract class Persoana {
     protected String email;
 
 
-    protected Persoana(int id, String nume, String email) {
-        this.id = id;
+    protected Persoana(int id,String nume, String email) {
         this.nume_complet = nume;
         this.email = email;
+        this.id=id;
     }
 
-    protected int getId() {
+    public int getId() {
         return this.id;
     }
 

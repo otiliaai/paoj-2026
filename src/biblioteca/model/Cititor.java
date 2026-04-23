@@ -2,11 +2,21 @@ package biblioteca.model;
 
 public class Cititor extends Persoana{
     protected int nrCartiImprumutate;
+    private static int contor = 1;
 
-    public Cititor(int id, String nume, String email){
-        super(id,nume,email);
+    public Cititor(String nume, String email){
+        super(contor++,nume,email);
         this.nrCartiImprumutate = 0;
     }
+
+    public void setNrCartiImprumutate(int nr){
+        nrCartiImprumutate +=nr;
+    }
+
+    public int getNrCartiImprumutate() {
+        return nrCartiImprumutate;
+    }
+
     @Override
     public String getRol() {
         return "Cititor";

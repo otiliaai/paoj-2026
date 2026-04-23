@@ -4,9 +4,10 @@ public class Autor {
     protected int id;
     protected String nume;
     protected String nationalitate;
+    private static int contor = 1;
 
-    public Autor(int id, String nume, String nationalitate) {
-        this.id = id;
+    public Autor( String nume, String nationalitate) {
+        this.id = contor++;
         this.nume = nume;
         this.nationalitate = nationalitate;
     }

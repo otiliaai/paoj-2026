@@ -7,16 +7,18 @@ public class Carte implements Comparable<Carte>{
     protected Sectiune sectiune;
     protected ISBN isbn;
     protected boolean disponibilitate;
+    private static int contor = 1;
 
 
-    public Carte(int id, String titlu, Autor autor, Sectiune sectiune, ISBN isbn, boolean disponibilitate) {
-        this.id = id;
+    public Carte( String titlu, Autor autor, Sectiune sectiune, ISBN isbn) {
+        this.id = contor++;
         this.titlu = titlu;
         this.autor = autor;
         this.sectiune = sectiune;
         this.isbn = isbn;
         this.disponibilitate = true;
     }
+
 
     public int getId(){
         return this.id;
