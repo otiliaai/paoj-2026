@@ -13,6 +13,12 @@ public final class ISBN {
         this.an = var3;
     }
 
+    public ISBN(String isbn, String cod, String tara, int an) {
+        this.cod = cod;
+        this.tara = tara;
+        this.an = an;
+    }
+
     public String getCod() {
         return this.cod;
     }

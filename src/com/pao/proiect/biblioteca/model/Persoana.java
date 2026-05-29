@@ -13,6 +13,10 @@ public abstract class Persoana implements Displayable {
         this.email = var3;
     }
 
+    public Persoana() {
+
+    }
+
     public int getId() {
         return this.id;
     }

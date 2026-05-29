@@ -14,6 +14,16 @@ public class Cititor extends Persoana {
         super(contor++, var1, var2);
     }
 
+    public Cititor(int id, String numeComplet, String email, int numarCarti) {
+        super(id, numeComplet, email);
+        this.nrCartiImprumutate = numarCarti;
+        this.istoricImprumuturi = new ArrayList<>();
+
+        if (id >= contor) {
+            contor = id + 1;
+        }
+    }
+
     public String getRol() {
         return "Cititor";
     }

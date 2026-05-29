@@ -18,6 +18,17 @@ public class Sectiune {
         this.carti = new TreeSet();
     }
 
+    public Sectiune(int id,String var1, String var2, GenLiterar var3) {
+        this.id = id;
+        this.nume = var1;
+        this.descriere = var2;
+        this.gen = var3;
+        this.carti = new TreeSet();
+    }
+
+
+
+
     public void adaugaCarte(Carte var1) {
         this.carti.add(var1);
     }

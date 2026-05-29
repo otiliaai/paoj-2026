@@ -28,6 +28,8 @@ public class Main {
         CarteService carteService = CarteService.getInstance();
         CititorService cititorService = CititorService.getInstance();
 
+        //System.out.println(DatabaseConnection.getInstance().getConnection());
+
         printSection("1. ADAUGARE CARTI");
 
         Autor autorEminescu = new Autor("Mihai Eminescu", "Romana");
@@ -222,4 +224,5 @@ public class Main {
         System.out.println(title);
         System.out.println(SEP);
     }
+
 }

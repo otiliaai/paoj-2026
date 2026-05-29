@@ -23,6 +23,20 @@ public class Eveniment {
         this.participanti = new ArrayList();
     }
 
+    public Eveniment(int id, String titlu, String data, String locatie, TipEveniment tip, Autor autor) {
+        this.id = id;
+        this.titlu = titlu;
+        this.data = data;
+        this.locatie = locatie;
+        this.tip = tip;
+        this.autor = autor;
+        this.participanti = new ArrayList<>();
+
+        if (id >= contor) {
+            contor = id + 1;
+        }
+    }
+
     public void adaugaParticipant(Cititor var1) {
         this.participanti.add(var1);
     }

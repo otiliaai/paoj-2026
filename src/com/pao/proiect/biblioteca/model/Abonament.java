@@ -16,6 +16,18 @@ public class Abonament {
         this.activ = true;
     }
 
+    public Abonament(int id, TipAbonament tip, String dataStart, String dataExpirare, boolean activ) {
+        this.id = id;
+        this.tip = tip;
+        this.dataStart = dataStart;
+        this.dataExpirare = dataExpirare;
+        this.activ = activ;
+
+        if (id >= contor) {
+            contor = id + 1;
+        }
+    }
+
     public boolean esteActiv() {
         return this.activ;
     }

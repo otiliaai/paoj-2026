@@ -18,6 +18,19 @@ public class Imprumut {
         this.status = StatusImprumut.ACTIV;
     }
 
+    public Imprumut(int id, Cititor cititor, Carte carte, String dataImprumut, String dataReturnare, StatusImprumut status) {
+        this.id = id;
+        this.cititor = cititor;
+        this.carte = carte;
+        this.dataImprumut = dataImprumut;
+        this.dataReturnare = dataReturnare;
+        this.status = status;
+
+        if (id >= contor) {
+            contor = id + 1;
+        }
+    }
+
     public int getId() {
         return this.id;
     }

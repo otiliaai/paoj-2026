@@ -15,6 +15,16 @@ public class Autor extends Persoana {
         this.cartiScrise = new ArrayList();
     }
 
+    public Autor(int id, String numeComplet, String nationalitate) {
+        super(id, numeComplet, "");
+        this.nationalitate = nationalitate;
+        this.cartiScrise = new ArrayList<>();
+
+        if (id >= contor) {
+            contor = id + 1;
+        }
+    }
+
     public String getNationalitate() {
         return this.nationalitate;
     }
