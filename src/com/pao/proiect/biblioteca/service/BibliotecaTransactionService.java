@@ -11,6 +11,7 @@ import java.time.LocalDate;
 
 public class BibliotecaTransactionService {
     private static BibliotecaTransactionService instance;
+    private final AuditService auditService = AuditService.getInstance();
 
     private BibliotecaTransactionService() {
     }
@@ -103,7 +104,7 @@ public class BibliotecaTransactionService {
                     ps.setInt(1, cititorId);
                     ps.executeUpdate();
                 }
-
+                auditService.logheaza("imprumuta_carte");
                 connection.commit();
 
                 System.out.println("Imprumutul a fost realizat cu succes.");
@@ -191,7 +192,7 @@ public class BibliotecaTransactionService {
                     ps.setInt(1, cititorId);
                     ps.executeUpdate();
                 }
-
+                auditService.logheaza("returneaza_carte");
                 connection.commit();
 
                 System.out.println("Cartea a fost returnata cu succes.");
