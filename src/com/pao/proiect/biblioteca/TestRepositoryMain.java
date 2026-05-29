@@ -2,6 +2,9 @@ package com.pao.proiect.biblioteca;
 
 import com.pao.proiect.biblioteca.model.*;
 import com.pao.proiect.biblioteca.repository.*;
+import com.pao.proiect.biblioteca.service.BibliotecaTransactionService;
+
+import java.util.Comparator;
 
 public class TestRepositoryMain {
     public static void main(String[] args) {
@@ -13,17 +16,17 @@ public class TestRepositoryMain {
         EvenimentRepository evenimentRepository = new EvenimentRepository();
         ImprumutRepository imprumutRepository = new ImprumutRepository();
 
-        // 1. cream autor
+        BibliotecaTransactionService transactionService = BibliotecaTransactionService.getInstance();
+
+        //creez autor
         Autor autor = new Autor("Frank Herbert", "americana");
         autorRepository.save(autor);
 
-        // 2. cream sectiune
-        // schimba GenLiterar.SF daca enum-ul tau are alta valoare
+        //creez sectiune
         Sectiune sectiune = new Sectiune("Science Fiction", "Carti SF", GenLiterar.BIOGRAFIE);
         sectiuneRepository.save(sectiune);
 
-        // 3. cream abonament
-        // schimba TipAbonament.PREMIUM daca enum-ul tau are alta valoare
+        //creez abonament
         Abonament abonament = new Abonament(
                 TipAbonament.ANUAL,
                 "2026-01-01",
@@ -31,18 +34,17 @@ public class TestRepositoryMain {
         );
         abonamentRepository.save(abonament);
 
-        // 4. cream cititor cu abonament
+        // creez cititor cu abonament
         Cititor cititor = new Cititor("Ana Popescu", "ana.popescu@email.com");
         cititor.setAbonament(abonament);
         cititorRepository.save(cititor);
 
-        // 5. cream carte
+        //creez carte pentru testarea CRUD-ului normal
         ISBN isbn = new ISBN("9780441013593", "SUA", 1965);
         Carte carte = new Carte("Dune", autor, sectiune, isbn);
         carteRepository.save(carte);
 
-        // 6. cream eveniment
-        // schimba TipEveniment.LANSARE daca enum-ul tau are alta valoare
+        // creez eveniment
         Eveniment eveniment = new Eveniment(
                 "Seara SF",
                 "2026-06-10",
@@ -52,11 +54,49 @@ public class TestRepositoryMain {
         );
         evenimentRepository.save(eveniment);
 
-        // 7. cream imprumut
+        // creez imprumut simplu, prin repository
+        // Acesta testeaza CRUD-ul pentru ImprumutRepository.
         Imprumut imprumut = new Imprumut(cititor, carte, "2026-06-01");
         imprumutRepository.save(imprumut);
 
-        // 8. testam findAll
+        // creez o carte separata pentru testarea tranzactiilor JDBC
+
+        ISBN isbnTranzactie = new ISBN("9780441013594", "SUA", 1969);
+        Carte cartePentruTranzactie = new Carte("Dune Messiah", autor, sectiune, isbnTranzactie);
+        carteRepository.save(cartePentruTranzactie);
+
+        // testare jdbc: imprumutare carte
+        System.out.println("\n--- TRANZACTIE JDBC: IMPRUMUTARE CARTE ---");
+        transactionService.imprumutaCarte(cititor.getId(), cartePentruTranzactie.getId());
+
+        System.out.println("\n--- IMPRUMUTURI DUPA TRANZACTIA DE IMPRUMUTARE ---");
+        imprumutRepository.findAll().forEach(System.out::println);
+
+        System.out.println("\n--- CARTI DUPA TRANZACTIA DE IMPRUMUTARE ---");
+        carteRepository.findAll().forEach(System.out::println);
+
+        System.out.println("\n--- CITITORI DUPA TRANZACTIA DE IMPRUMUTARE ---");
+        cititorRepository.findAll().forEach(System.out::println);
+
+        int imprumutTranzactieId = imprumutRepository.findAll()
+                .stream()
+                .max(Comparator.comparingInt(Imprumut::getId))
+                .map(Imprumut::getId)
+                .orElseThrow(() -> new RuntimeException("Nu exista niciun imprumut in baza de date."));
+
+        System.out.println("\n--- TRANZACTIE JDBC: RETURNARE CARTE ---");
+        transactionService.returneazaCarte(imprumutTranzactieId);
+
+        System.out.println("\n--- IMPRUMUTURI DUPA TRANZACTIA DE RETURNARE ---");
+        imprumutRepository.findAll().forEach(System.out::println);
+
+        System.out.println("\n--- CARTI DUPA TRANZACTIA DE RETURNARE ---");
+        carteRepository.findAll().forEach(System.out::println);
+
+        System.out.println("\n--- CITITORI DUPA TRANZACTIA DE RETURNARE ---");
+        cititorRepository.findAll().forEach(System.out::println);
+
+        // findall
         System.out.println("\n--- AUTORI ---");
         autorRepository.findAll().forEach(System.out::println);
 
@@ -78,13 +118,13 @@ public class TestRepositoryMain {
         System.out.println("\n--- IMPRUMUTURI ---");
         imprumutRepository.findAll().forEach(System.out::println);
 
-        // 9. testam findById
+        // findbyid
         System.out.println("\n--- FIND BY ID ---");
         System.out.println("Autor id " + autor.getId() + ": " + autorRepository.findById(autor.getId()));
         System.out.println("Carte id " + carte.getId() + ": " + carteRepository.findById(carte.getId()));
         System.out.println("Cititor id " + cititor.getId() + ": " + cititorRepository.findById(cititor.getId()));
 
-        // 10. testam update
+        //update
         autor.setNationalitate("americana actualizata");
         autorRepository.update(autor);
 
@@ -99,9 +139,7 @@ public class TestRepositoryMain {
         carteRepository.findAll().forEach(System.out::println);
         cititorRepository.findAll().forEach(System.out::println);
 
-        // 11. testam delete pe o entitate simpla
-        // Nu sterge autorul/sectiunea acum, pentru ca sunt legate de carte.
-        // Poti testa delete pe eveniment:
+        //testare delete
         evenimentRepository.delete(eveniment.getId());
 
         System.out.println("\n--- EVENIMENTE DUPA DELETE ---");
